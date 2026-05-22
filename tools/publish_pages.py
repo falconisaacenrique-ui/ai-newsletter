@@ -13,9 +13,9 @@ from _common import DOCS, log
 
 ARCHIVE_TEMPLATE = """<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><title>AI Newsletter — Archive</title>
-<style>body{font-family:-apple-system,sans-serif;max-width:680px;margin:40px auto;padding:0 20px;color:#1c1917}
-h1{font-size:24px}.row{padding:10px 0;border-bottom:1px solid #e7e5e4}
-.date{color:#78716c;font-size:13px;margin-right:8px}a{color:#0c4a6e}</style>
+<style>body{{font-family:-apple-system,sans-serif;max-width:680px;margin:40px auto;padding:0 20px;color:#1c1917}}
+h1{{font-size:24px}}.row{{padding:10px 0;border-bottom:1px solid #e7e5e4}}
+.date{{color:#78716c;font-size:13px;margin-right:8px}}a{{color:#0c4a6e}}</style>
 </head><body>
 <h1>AI Newsletter — Archive</h1>
 <p style="color:#78716c">Every issue lives here in English and Spanish.</p>
