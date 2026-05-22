@@ -10,7 +10,7 @@ Built on the **WAT framework**: deterministic Python tools in `tools/`, markdown
 
 ## Stack
 - **Sources**: RSS (Anthropic, OpenAI, DeepMind, Google AI, Mistral, Hugging Face, Simon Willison, Latent Space, The Batch, …) + Hacker News API + Reddit (r/LocalLLaMA, r/MachineLearning, r/singularity)
-- **LLM**: Claude `claude-opus-4-7` for ranking & writing, `claude-sonnet-4-6` for translation. System prompts cached → ~80 % input-cost savings on repeat calls.
+- **LLM**: Claude `claude-sonnet-4-6` for ranking, writing, and (when enabled) translation. System prompts cached → ~80 % input-cost savings on repeat calls. Per-issue API cost ≈ $0.20 daily / $0.40 weekly.
 - **Email**: Gmail API (OAuth)
 - **Web archive**: GitHub Pages (`docs/`). Each issue published in EN and ES; email links to both.
 - **Schedule**: GitHub Actions cron at 12:00 + 13:00 UTC; the script no-ops unless local Houston hour == 7 (DST-safe).

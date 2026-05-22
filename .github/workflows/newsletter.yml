@@ -53,7 +53,7 @@ jobs:
           NEWSLETTER_FROM_NAME: ${{ secrets.NEWSLETTER_FROM_NAME }}
           PAGES_BASE_URL: ${{ secrets.PAGES_BASE_URL }}
           REDDIT_USER_AGENT: "ai-newsletter/0.1 (github actions)"
-          MODEL_RANKER: "claude-opus-4-7"
+          MODEL_RANKER: "claude-sonnet-4-6"
           MODEL_TRANSLATOR: "claude-sonnet-4-6"
         run: |
           ARGS=""
