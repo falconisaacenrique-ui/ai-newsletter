@@ -23,25 +23,26 @@ h1{{font-size:24px}}.row{{padding:10px 0;border-bottom:1px solid #e7e5e4}}
 </body></html>"""
 
 ARCHIVE_ROW = ('<div class="row"><span class="date">{date}</span>'
-               '<strong>{title}</strong> '
-               '<a href="{en}">🇺🇸 EN</a> · <a href="{es}">🇪🇸 ES</a></div>')
+               '<strong><a href="{en}">{title}</a></strong></div>')
 
 ISSUE_RE = re.compile(r"^(\d{4}-\d{2}-\d{2})-(en|es)\.html$")
 
 
-def publish(date_iso: str, mode: str, html_en: str, html_es: str,
-            ranked: dict) -> tuple[Path, Path]:
+def publish(date_iso: str, mode: str, html_en: str, html_es: str | None,
+            ranked: dict) -> Path:
     en_path = DOCS / f"{date_iso}-en.html"
-    es_path = DOCS / f"{date_iso}-es.html"
     en_path.write_text(html_en, encoding="utf-8")
-    es_path.write_text(html_es, encoding="utf-8")
+
+    if html_es:
+        es_path = DOCS / f"{date_iso}-es.html"
+        es_path.write_text(html_es, encoding="utf-8")
 
     # index.html → latest English issue
     (DOCS / "index.html").write_text(html_en, encoding="utf-8")
 
     _rebuild_archive()
-    log.info(f"published {date_iso} EN/ES + refreshed index/archive")
-    return en_path, es_path
+    log.info(f"published {date_iso} + refreshed index/archive")
+    return en_path
 
 
 def _title_of(html: str) -> str:
@@ -63,10 +64,7 @@ def _rebuild_archive() -> None:
         if "en" not in e:
             continue
         title = _title_of((DOCS / e["en"]).read_text(encoding="utf-8"))
-        rows.append(ARCHIVE_ROW.format(
-            date=date, title=title,
-            en=e["en"], es=e.get("es", e["en"]),
-        ))
+        rows.append(ARCHIVE_ROW.format(date=date, title=title, en=e["en"]))
     (DOCS / "archive.html").write_text(
         ARCHIVE_TEMPLATE.format(rows="\n".join(rows) or
                                 "<p>No issues yet.</p>"),

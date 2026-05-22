@@ -169,36 +169,26 @@ def main() -> None:
                                            dry_run=args.dry_run)
     write_json(archive_path(date_iso, "-monetization"), monet)
 
-    # 5. Render English
-    _section("[5/8] Render English")
+    # 5. Render English (Spanish translation removed — English-only newsletter)
+    _section("[5/6] Render email")
     html_en = render_email.render(mode, ranked, monet, date_iso, lang="en")
 
-    # 6. Translate
-    _section("[6/8] Translate to Spanish")
-    html_es = translate_to_spanish.translate(
-        html_en,
-        dry_run=(args.dry_run or args.skip_translation),
-    )
-
-    # Persist preview copies regardless of mode
     preview_en = ARCHIVE / f"preview-{date_iso}-en.html"
-    preview_es = ARCHIVE / f"preview-{date_iso}-es.html"
     preview_en.write_text(html_en, encoding="utf-8")
-    preview_es.write_text(html_es, encoding="utf-8")
-    log.info(f"preview HTML → {preview_en} / {preview_es}")
+    log.info(f"preview HTML → {preview_en}")
 
-    # 7. Publish to docs/
+    # 6. Publish to docs/
     if args.dry_run or args.skip_publish or args.to_self:
-        _section("[7/8] Publish to docs/ — SKIPPED")
+        _section("[6/6] Publish to docs/ — SKIPPED")
     else:
-        _section("[7/8] Publish to docs/")
-        publish_pages.publish(date_iso, mode, html_en, html_es, ranked)
+        _section("[6/6] Publish to docs/")
+        publish_pages.publish(date_iso, mode, html_en, None, ranked)
 
-    # 8. Send
+    # 7. Send
     if args.dry_run or args.skip_send:
-        _section("[8/8] Send email — SKIPPED")
+        _section("[7/7] Send email — SKIPPED")
     else:
-        _section("[8/8] Send email")
+        _section("[7/7] Send email")
         subscribers = []
         sub_file = ROOT / "subscribers.json"
         if sub_file.exists():
