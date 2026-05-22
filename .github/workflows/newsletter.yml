@@ -38,11 +38,11 @@ jobs:
         env:
           SUBSCRIBERS_JSON: ${{ secrets.SUBSCRIBERS_JSON }}
         run: |
-          # Write the secret to disk without shell interpolation. printenv
-          # outputs the raw value byte-for-byte; redirect into the file.
-          printenv SUBSCRIBERS_JSON > subscribers.json
-          # Sanity check: must be valid JSON, must contain a "subscribers" key.
-          python -c "import json,sys; d=json.load(open('subscribers.json',encoding='utf-8')); assert 'subscribers' in d, 'missing subscribers key'; print(f'OK: {len(d[\"subscribers\"])} subscriber(s) loaded')"
+          # Write the secret to disk without shell interpolation, then strip
+          # any leading UTF-8 BOM (PowerShell uploads can introduce one).
+          printenv SUBSCRIBERS_JSON | sed '1s/^\xEF\xBB\xBF//' > subscribers.json
+          # Sanity check: must be valid JSON with a "subscribers" key.
+          python -c "import json; d=json.load(open('subscribers.json',encoding='utf-8-sig')); assert 'subscribers' in d, 'missing subscribers key'; print(f'OK: {len(d[\"subscribers\"])} subscriber(s) loaded')"
 
       - name: Run pipeline
         env:
