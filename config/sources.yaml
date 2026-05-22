@@ -1,0 +1,52 @@
+# Source registry. Add/remove freely. `weight` biases the ranker — items from
+# higher-weight sources start with a higher base score before Claude reranks.
+
+rss:
+  # First-party labs (highest signal)
+  - { name: Anthropic,          url: "https://www.anthropic.com/news/rss.xml",                  weight: 1.0 }
+  - { name: OpenAI Blog,        url: "https://openai.com/blog/rss.xml",                         weight: 1.0 }
+  - { name: Google DeepMind,    url: "https://deepmind.google/blog/rss.xml",                    weight: 1.0 }
+  - { name: Google AI Blog,     url: "https://blog.google/technology/ai/rss/",                  weight: 0.9 }
+  - { name: Mistral,            url: "https://mistral.ai/news/rss.xml",                         weight: 0.9 }
+  - { name: Hugging Face,       url: "https://huggingface.co/blog/feed.xml",                    weight: 0.9 }
+  - { name: Meta AI,            url: "https://ai.meta.com/blog/rss/",                           weight: 0.9 }
+  - { name: Cohere,             url: "https://cohere.com/blog/rss.xml",                         weight: 0.7 }
+  # Independent analysts / builders
+  - { name: Simon Willison,     url: "https://simonwillison.net/atom/everything/",              weight: 0.9 }
+  - { name: Latent Space,       url: "https://www.latent.space/feed",                           weight: 0.85 }
+  - { name: The Batch,          url: "https://www.deeplearning.ai/the-batch/feed/",             weight: 0.85 }
+  - { name: Interconnects,      url: "https://www.interconnects.ai/feed",                       weight: 0.85 }
+  - { name: Import AI,          url: "https://jack-clark.net/feed/",                            weight: 0.8 }
+  - { name: Stratechery (free), url: "https://stratechery.com/feed/",                           weight: 0.7 }
+  - { name: Ars Technica AI,    url: "https://arstechnica.com/ai/feed/",                        weight: 0.6 }
+
+hackernews:
+  # We hit the Algolia HN API in fetch_hackernews.py. Listed here for reference.
+  query: "AI OR LLM OR Anthropic OR Claude OR OpenAI OR Gemini OR Mistral OR open source"
+  min_points: 75
+  weight: 0.8
+
+reddit:
+  subreddits:
+    - { name: LocalLLaMA,       weight: 0.85 }
+    - { name: MachineLearning,  weight: 0.75 }
+    - { name: singularity,      weight: 0.55 }
+    - { name: ClaudeAI,         weight: 0.65 }
+    - { name: OpenAI,           weight: 0.6 }
+  min_upvotes: 100
+  time_filter: day
+
+# Ranker config
+ranker:
+  daily_target_items:
+    headline_story: 1
+    models_releases: 3
+    tools_resources: 5
+    cool_uses: 3
+    oneliners: 8
+  weekly_target_items:
+    biggest_release: 1
+    tools_shipped: 8
+    trend_tracker: 4
+    friday_fresh: 3
+    oneliners: 12

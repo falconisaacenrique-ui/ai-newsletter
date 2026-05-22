@@ -1,0 +1,12 @@
+.env
+.env.local
+token.json
+credentials.json
+subscribers.json
+archive/
+.tmp/
+__pycache__/
+*.pyc
+.venv/
+venv/
+.DS_Store

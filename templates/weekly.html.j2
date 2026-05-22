@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="{{ lang }}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<meta name="supported-color-schemes" content="light">
+<title>{{ strings.brand_weekly }} — {{ date }}</title>
+<style>{{ css | safe }}</style>
+</head>
+<body class="{{ lang }}">
+<div class="outer">
+  <div class="container">
+
+    <div class="masthead">
+      <div class="masthead-left">
+        <div class="brand"><span class="dot"></span>{{ strings.brand_weekly }}</div>
+      </div>
+      <div class="masthead-right">
+        <div class="issue-meta">{{ strings.issue_label }} {{ issue_no }} · {{ date_display }}</div>
+      </div>
+    </div>
+
+    {% if url_en and url_es %}
+    <div class="lang-toggle">
+      <a href="{{ url_en }}" {% if lang == "en" %}class="active"{% endif %}>🇺🇸 EN</a>
+      <span class="sep">·</span>
+      <a href="{{ url_es }}" {% if lang == "es" %}class="active"{% endif %}>🇪🇸 ES</a>
+    </div>
+    {% endif %}
+
+    <div class="pad">
+
+      <h1>{{ ranked.biggest_release.title }}</h1>
+      {% if ranked.biggest_release.dek %}<p class="dek-lead">{{ ranked.biggest_release.dek }}</p>{% endif %}
+
+      <div class="tldr">
+        <div class="tldr-label">{{ strings.tldr_week_label }}</div>
+        <ol>
+          {% for line in ranked.tldr %}<li>{{ line }}</li>{% endfor %}
+        </ol>
+      </div>
+
+      <h2>{{ strings.biggest_release }}</h2>
+      <div class="item">
+        <div class="body">{{ ranked.biggest_release.body | safe }}</div>
+        {% if ranked.biggest_release.so_what %}<span class="so-what">{{ ranked.biggest_release.so_what }}</span>{% endif %}
+        <div class="source"><a href="{{ ranked.biggest_release.url }}">{{ ranked.biggest_release.source }}</a></div>
+      </div>
+
+      <h2>{{ strings.tools_shipped }}</h2>
+      {% for it in ranked.tools_shipped %}
+      <div class="item">
+        <h3><a href="{{ it.url }}">{{ it.title }}</a></h3>
+        {% if it.dek %}<span class="dek">{{ it.dek }}</span>{% endif %}
+        <div class="body">{{ it.body | safe }}</div>
+        {% if it.so_what %}<span class="so-what">{{ it.so_what }}</span>{% endif %}
+        <div class="source">{{ it.source }}</div>
+      </div>
+      {% endfor %}
+
+      <h2>{{ strings.trends }}</h2>
+      {% for t in ranked.trend_tracker %}
+      <div class="trend">
+        <span class="trend-name">{{ t.name }}</span>
+        <span class="trend-dir {{ t.direction }}">{{ t.direction }}</span>
+        <div class="trend-body">{{ t.body | safe }}</div>
+      </div>
+      {% endfor %}
+
+      <h2>{{ strings.friday_fresh }}</h2>
+      {% for it in ranked.friday_fresh %}
+      <div class="item">
+        <h3><a href="{{ it.url }}">{{ it.title }}</a></h3>
+        {% if it.dek %}<span class="dek">{{ it.dek }}</span>{% endif %}
+        <div class="body">{{ it.body | safe }}</div>
+        {% if it.so_what %}<span class="so-what">{{ it.so_what }}</span>{% endif %}
+        <div class="source">{{ it.source }}</div>
+      </div>
+      {% endfor %}
+
+      <div class="monetization">
+        <div class="monetization-label">§ {{ strings.monetization_synthesis_label }}</div>
+        <h2>{{ strings.monetization_synthesis }}</h2>
+        {% if monetization.synthesis %}
+        <div class="synthesis">{{ monetization.synthesis }}</div>
+        {% endif %}
+        {% for a in monetization.angles %}
+        <div class="angle">
+          <div class="angle-title">{{ a.title }}</div>
+          <div class="angle-pills">
+            <span class="pill pill-kind">{{ a.kind | replace("_", " ") }}</span>
+            <span class="pill pill-effort">{{ a.effort_level | replace("_", " ") }}</span>
+            {% if a.revenue_size %}<span class="pill pill-revenue">{{ a.revenue_size }}</span>{% endif %}
+          </div>
+          <div class="angle-row"><span class="label">{{ strings.who_buys }}</span><span class="val">{{ a.who_buys }}</span></div>
+          <div class="angle-row"><span class="label">{{ strings.why_now }}</span><span class="val">{{ a.why_now }}</span></div>
+          <div class="angle-row"><span class="label">{{ strings.first_step }}</span><span class="val">{{ a.first_step }}</span></div>
+          <div class="angle-row"><span class="label">{{ strings.risk }}</span><span class="val">{{ a.risk_note }}</span></div>
+        </div>
+        {% endfor %}
+      </div>
+
+      <h2>{{ strings.reading_queue }}</h2>
+      <ul class="oneliners">
+        {% for o in ranked.reading_queue %}
+        <li><strong><a href="{{ o.url }}">{{ o.title }}</a></strong> — {{ o.summary }} <span class="source">({{ o.source }})</span></li>
+        {% endfor %}
+      </ul>
+
+      <h2>{{ strings.oneliners }}</h2>
+      <ul class="oneliners">
+        {% for o in ranked.oneliners %}
+        <li><strong><a href="{{ o.url }}">{{ o.title }}</a></strong> — {{ o.summary }} <span class="source">({{ o.source }})</span></li>
+        {% endfor %}
+      </ul>
+
+      <div class="signoff">
+        <div class="signoff-name">— {{ strings.signoff_line_weekly }}</div>
+        <div class="signoff-brand">{{ strings.brand_weekly }}</div>
+      </div>
+
+    </div>
+
+    <div class="footer">
+      {{ strings.footer_archive }} <a href="{{ archive_url }}">{{ strings.archive }}</a> · {{ strings.footer_feedback }}
+      <span class="made">{{ strings.footer_made }}</span>
+    </div>
+  </div>
+</div>
+</body>
+</html>

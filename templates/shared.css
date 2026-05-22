@@ -1,0 +1,433 @@
+/* AI Daily — editorial paper aesthetic.
+ * Designed for Gmail / Apple Mail / Outlook web rendering.
+ * Uses only system fonts (no external @import — most email clients block them).
+ * Color palette: warm cream paper + ink + a sparingly-used terracotta accent.
+ */
+
+/* ---- Reset ---- */
+body, table, td, p, a, li, blockquote {
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+img { border: 0; outline: none; text-decoration: none; }
+
+/* ---- Page ---- */
+body {
+  margin: 0;
+  padding: 0;
+  background: #F0EBE0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #2A2723;
+  line-height: 1.6;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.outer {
+  width: 100%;
+  background: #F0EBE0;
+  padding: 32px 0 48px 0;
+}
+.container {
+  max-width: 640px;
+  margin: 0 auto;
+  background: #FBF8F1;
+  padding: 0;
+  border: 1px solid #E4DCC9;
+  box-shadow: 0 1px 0 #E4DCC9, 0 8px 24px -16px rgba(45,30,20,0.15);
+}
+.pad {
+  padding: 36px 40px;
+}
+
+/* ---- Masthead ---- */
+.masthead {
+  display: table;
+  width: 100%;
+  border-bottom: 1px solid #E4DCC9;
+  padding: 22px 40px 18px 40px;
+  background: #FBF8F1;
+}
+.masthead-left, .masthead-right {
+  display: table-cell;
+  vertical-align: middle;
+}
+.masthead-right {
+  text-align: right;
+}
+.brand {
+  font-family: "Iowan Old Style", "Hoefler Text", "Garamond", Georgia, "Times New Roman", serif;
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 0.02em;
+  color: #1A1614;
+}
+.brand .dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  background: #C44D2C;
+  border-radius: 50%;
+  margin-right: 9px;
+  vertical-align: middle;
+  margin-top: -2px;
+}
+.issue-meta {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #8A7F70;
+  font-weight: 600;
+}
+
+/* ---- Language toggle ---- */
+.lang-toggle {
+  padding: 12px 40px;
+  background: #F5F0E2;
+  border-bottom: 1px solid #E4DCC9;
+  font-size: 12px;
+  text-align: right;
+}
+.lang-toggle a {
+  color: #6B5F4E;
+  text-decoration: none;
+  padding: 4px 10px;
+  border-radius: 3px;
+  letter-spacing: 0.02em;
+}
+.lang-toggle a.active {
+  background: #1A1614;
+  color: #FBF8F1;
+  font-weight: 600;
+}
+.lang-toggle .sep { color: #C9BFA8; padding: 0 4px; }
+
+/* ---- Headline ---- */
+h1 {
+  font-family: "Iowan Old Style", "Hoefler Text", "Garamond", Georgia, "Times New Roman", serif;
+  font-size: 36px;
+  line-height: 1.15;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin: 4px 0 8px 0;
+  color: #14110F;
+}
+.dek-lead {
+  font-family: "Iowan Old Style", "Hoefler Text", Georgia, serif;
+  font-size: 17px;
+  font-style: italic;
+  color: #6B5F4E;
+  margin: 0 0 28px 0;
+  line-height: 1.5;
+}
+
+/* ---- TL;DR ---- */
+.tldr {
+  background: #FFFFFF;
+  border: 1px solid #E4DCC9;
+  border-left: 3px solid #C44D2C;
+  padding: 18px 22px 20px 22px;
+  margin: 0 0 36px 0;
+  border-radius: 2px;
+}
+.tldr-label {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #C44D2C;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.tldr ol {
+  margin: 0;
+  padding-left: 24px;
+  counter-reset: tldr;
+  list-style: none;
+}
+.tldr li {
+  position: relative;
+  padding: 6px 0 6px 8px;
+  font-size: 15px;
+  line-height: 1.55;
+  counter-increment: tldr;
+}
+.tldr li:before {
+  content: counter(tldr, decimal-leading-zero);
+  position: absolute;
+  left: -24px;
+  top: 6px;
+  font-family: "Iowan Old Style", Georgia, serif;
+  font-weight: 700;
+  color: #C44D2C;
+  font-size: 13px;
+}
+
+/* ---- Section heads ---- */
+h2 {
+  font-family: "Iowan Old Style", "Hoefler Text", Georgia, serif;
+  font-size: 13px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #1A1614;
+  margin: 44px 0 18px 0;
+  padding: 0 0 10px 0;
+  border-bottom: 1px solid #E4DCC9;
+}
+h2:first-of-type { margin-top: 24px; }
+
+/* ---- Item ---- */
+.item {
+  margin: 0 0 28px 0;
+}
+.item h3 {
+  font-family: "Iowan Old Style", "Hoefler Text", Georgia, serif;
+  font-size: 20px;
+  line-height: 1.3;
+  font-weight: 700;
+  margin: 0 0 4px 0;
+  color: #14110F;
+}
+.item h3 a { color: #14110F; text-decoration: none; }
+.item h3 a:hover { color: #C44D2C; }
+.dek {
+  display: block;
+  font-family: "Iowan Old Style", Georgia, serif;
+  font-size: 15px;
+  font-style: italic;
+  color: #6B5F4E;
+  margin-bottom: 10px;
+}
+.item p, .item div.body { margin: 8px 0 12px 0; }
+.so-what {
+  display: block;
+  margin: 14px 0 6px 0;
+  padding: 10px 14px 10px 14px;
+  background: #FFF7EE;
+  border-left: 3px solid #C44D2C;
+  font-style: italic;
+  color: #3A2E22;
+  font-size: 15px;
+  border-radius: 0 2px 2px 0;
+}
+.so-what::before {
+  content: "So what:";
+  font-style: normal;
+  font-weight: 700;
+  color: #C44D2C;
+  margin-right: 6px;
+  letter-spacing: 0.02em;
+}
+.es .so-what::before { content: "Por qué importa:"; }
+.source {
+  font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #8A7F70;
+  font-weight: 600;
+}
+.source a { color: #8A7F70; text-decoration: none; border-bottom: 1px dotted #C9BFA8; }
+a { color: #B23E1F; text-decoration: underline; text-decoration-color: rgba(178,62,31,0.35); text-underline-offset: 2px; }
+a:hover { color: #8C2F17; text-decoration-color: #C44D2C; }
+
+/* ---- One-liners ---- */
+.oneliners {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.oneliners li {
+  padding: 12px 0;
+  border-bottom: 1px dotted #D6CDB8;
+  font-size: 15px;
+  line-height: 1.5;
+}
+.oneliners li:last-child { border-bottom: none; }
+.oneliners li strong a {
+  color: #14110F;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(196,77,44,0.4);
+}
+.oneliners li strong a:hover {
+  border-bottom-color: #C44D2C;
+}
+
+/* ---- Monetization corner ---- */
+.monetization {
+  background: #FFF7E4;
+  border: 1px solid #E8D9A8;
+  border-top: 3px solid #B8893F;
+  padding: 28px 32px 24px 32px;
+  margin: 44px 0 8px 0;
+  border-radius: 2px;
+}
+.monetization-label {
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #8C6420;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.monetization h2 {
+  border-bottom: none;
+  margin: 0 0 6px 0;
+  padding: 0;
+  color: #1A1614;
+  font-size: 22px;
+  letter-spacing: -0.005em;
+  text-transform: none;
+  font-weight: 700;
+}
+.monetization-intro {
+  font-family: "Iowan Old Style", Georgia, serif;
+  font-style: italic;
+  color: #6B5F4E;
+  font-size: 14px;
+  margin: 0 0 20px 0;
+  line-height: 1.5;
+}
+.synthesis {
+  background: #FFFFFF;
+  padding: 16px 18px;
+  border-radius: 2px;
+  margin: 0 0 18px 0;
+  font-family: "Iowan Old Style", Georgia, serif;
+  font-size: 15px;
+  font-style: italic;
+  color: #3A2E22;
+  border-left: 2px solid #B8893F;
+}
+.angle {
+  background: #FFFFFF;
+  border: 1px solid #E8D9A8;
+  border-radius: 3px;
+  padding: 18px 20px 16px 20px;
+  margin: 14px 0;
+}
+.angle-title {
+  font-family: "Iowan Old Style", Georgia, serif;
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 1.3;
+  color: #14110F;
+  margin: 0 0 8px 0;
+}
+.angle-pills {
+  margin: 0 0 14px 0;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+}
+.pill {
+  display: inline-block;
+  padding: 3px 9px;
+  margin-right: 6px;
+  border-radius: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 10px;
+}
+.pill-kind { background: #1A1614; color: #FBF8F1; }
+.pill-effort { background: #FFFFFF; color: #8C6420; border: 1px solid #E8D9A8; }
+.pill-revenue { background: #FFFFFF; color: #3F7A4E; border: 1px solid #C9E0CD; }
+.angle-row {
+  margin: 5px 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #2A2723;
+}
+.angle-row .label {
+  display: inline-block;
+  min-width: 78px;
+  font-weight: 700;
+  color: #8C6420;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  vertical-align: top;
+  padding-top: 1px;
+}
+.angle-row .val {
+  display: inline;
+}
+
+/* ---- Trend tracker (weekly) ---- */
+.trend {
+  margin: 18px 0;
+  padding: 14px 18px;
+  background: #FFFFFF;
+  border: 1px solid #E4DCC9;
+  border-left: 3px solid #1A1614;
+  border-radius: 2px;
+}
+.trend-name {
+  font-family: "Iowan Old Style", Georgia, serif;
+  font-weight: 700;
+  font-size: 17px;
+  color: #14110F;
+}
+.trend-dir {
+  display: inline-block;
+  font-size: 10px;
+  padding: 2px 9px;
+  border-radius: 10px;
+  margin-left: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  vertical-align: middle;
+}
+.trend-dir.accelerating { background: #E7F2EA; color: #2E5C3B; }
+.trend-dir.decelerating { background: #F7E3DE; color: #A04938; }
+.trend-dir.shifting { background: #F1EBE0; color: #6B5F4E; }
+.trend-body { margin-top: 8px; font-size: 15px; }
+
+/* ---- Footer ---- */
+.signoff {
+  margin-top: 48px;
+  padding-top: 24px;
+  border-top: 1px solid #E4DCC9;
+}
+.signoff-name {
+  font-family: "Iowan Old Style", Georgia, serif;
+  font-style: italic;
+  font-size: 16px;
+  color: #3A2E22;
+  margin-bottom: 4px;
+}
+.signoff-brand {
+  font-family: "Iowan Old Style", Georgia, serif;
+  font-weight: 700;
+  font-size: 15px;
+  color: #14110F;
+}
+.footer {
+  text-align: center;
+  padding: 24px 40px 36px 40px;
+  font-size: 12px;
+  color: #8A7F70;
+  background: #F5F0E2;
+  border-top: 1px solid #E4DCC9;
+}
+.footer a { color: #6B5F4E; text-decoration: none; border-bottom: 1px dotted #C9BFA8; }
+.footer .made {
+  display: block;
+  margin-top: 10px;
+  font-size: 11px;
+  color: #A89D8A;
+  letter-spacing: 0.02em;
+}
+
+/* ---- Mobile ---- */
+@media only screen and (max-width: 620px) {
+  .pad { padding: 28px 22px; }
+  .masthead { padding: 18px 22px 14px 22px; }
+  .lang-toggle { padding: 10px 22px; }
+  .footer { padding: 22px 22px 30px 22px; }
+  h1 { font-size: 28px; }
+  .monetization { padding: 22px 20px; }
+  .angle { padding: 16px 16px 14px 16px; }
+  .angle-row .label { display: block; min-width: 0; margin-bottom: 2px; }
+}
